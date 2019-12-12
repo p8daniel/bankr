@@ -33,4 +33,4 @@ fabric.properties
 volumes/
 venv/
 
-weboob/
+#weboob/

@@ -11,8 +11,6 @@ class Pokemons(Resource):
         pokemons_matching = search_pokemons(query, type=None)
         pokemons = [pokemon.get_small_data() for pokemon in pokemons_matching]
 
-        merde
-
         add_pokemon_search_history(request.remote_addr, query)
 
         return pokemons
