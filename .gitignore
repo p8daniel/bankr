@@ -33,6 +33,4 @@ fabric.properties
 volumes/
 venv/
 
-
-docker-compose.yml
 weboob/
