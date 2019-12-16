@@ -9,6 +9,7 @@ from .bank import Bank
 
 class Account(BaseModel):
     bank = ForeignKeyField(Bank)
+    account_id = CharField()
     user = ForeignKeyField(User)
     label = CharField()
     balance = FloatField()
