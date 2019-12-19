@@ -11,3 +11,7 @@ class NotFoundError(Exception):
 class BankNotFoundError(NotFoundError):
     def __init__(self, resource_id):
         NotFoundError.__init__(self, "Bank", resource_id)
+
+class AccountNotFoundError(NotFoundError):
+    def __init__(self, resource_id):
+        NotFoundError.__init__(self, "Account", resource_id)
