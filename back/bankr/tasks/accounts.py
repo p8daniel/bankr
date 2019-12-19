@@ -3,6 +3,7 @@ from weboob.core import Weboob
 
 from bankr.core import logger
 from bankr.models.account import Account
+from bankr.models.transaction import Transaction
 from bankr.models.bank import Bank
 from bankr.models.user import User
 from . import celery
@@ -39,3 +40,17 @@ def retrieve_accounts():
                 db_account.label = account.label
                 db_account.balance = account.balance
                 db_account.save()
+
+            trasnsactions = bank_backend.iter_history(account)
+            for transaction in trasnsactions:
+                logger.info(f'[Accounts] Retrieving transaction {transaction.date} - {transaction.label} from {transaction.amount}')
+
+                db_transaction = Transaction.get_or_none(account=db_account, date=transaction.date, label=transaction.label, amount=transaction.amount)
+                if db_transaction is None:
+                    db_transaction = Transaction.create(account=db_account, date=transaction.date, label=transaction.label, amount=transaction.amount)
+
+
+
+
+
+

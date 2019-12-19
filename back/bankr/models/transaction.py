@@ -10,6 +10,7 @@ class Transaction(BaseModel):
     account = ForeignKeyField(Account)
     label = CharField()
     amount = FloatField()
+    date =CharField()
 
 
 with db:
