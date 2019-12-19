@@ -8,5 +8,6 @@ app.config['DEBUG'] = True
 
 CORS(app, resources={r"*": {"origins": "*"}}, supports_credentials=True)
 
+from . import errors
 from . import auth
 from . import api

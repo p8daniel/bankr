@@ -35,8 +35,8 @@ venv/
 
 #weboob/
 weboob/*
-!weboob/modules
-weboob/modules/*
+#!weboob/modules
+#weboob/modules/*
 !weboob/modules/fakebank
 !weboob/modules/fakebank_v2
 !weboob/modules/fakebank_v3

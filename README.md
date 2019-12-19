@@ -27,6 +27,7 @@ $ cd back/
 $ virtualenv --python=python3 venv
 $ source venv/bin/activate
 (venv) $ pip install -r requirements.txt
+(venv) $ pip install -e PATH/TO/WEBOOB
 ```
 
 Then to launch it everytime :
