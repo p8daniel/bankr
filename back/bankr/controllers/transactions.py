@@ -1,6 +1,5 @@
-from bankr.errors.not_found import BankNotFoundError, AccountNotFoundError
+from bankr.errors.not_found import AccountNotFoundError
 from bankr.models.transaction import Transaction
-# from bankr.models.bank import Bank
 from .accounts import get_accounts
 from bankr.models.account import Account
 
