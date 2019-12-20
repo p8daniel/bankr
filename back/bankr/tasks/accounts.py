@@ -3,7 +3,7 @@ from weboob.core import Weboob
 
 from bankr.core import logger
 from bankr.models.account import Account
-from bankr.models.transaction import Transaction
+from bankr.models.transaction import Transaction, TransactionCategory
 from bankr.models.bank import Bank
 from bankr.models.user import User
 from . import celery
@@ -22,6 +22,12 @@ def retrieve_accounts():
     the_bank = Bank.get_or_none(name='fakebank')
     if the_bank is None:
         Bank.create(name='fakebank')
+
+    categories = ['Alimentation', 'Logement', 'Vie quotidienne', 'Autre']
+    for category in categories:
+        db_category = TransactionCategory.get_or_none(name=category)
+        if db_category is None:
+            TransactionCategory.create(name=category)
 
     for bank in Bank.select():
 
@@ -43,14 +49,13 @@ def retrieve_accounts():
 
             trasnsactions = bank_backend.iter_history(account)
             for transaction in trasnsactions:
-                logger.info(f'[Accounts] Retrieving transaction {transaction.date} - {transaction.label} from {transaction.amount}')
+                logger.info(
+                    f'[Accounts] Retrieving transaction {transaction.date} - {transaction.label} from {transaction.amount}')
 
-                db_transaction = Transaction.get_or_none(account=db_account, date=transaction.date, label=transaction.label, amount=transaction.amount)
+                db_transaction = Transaction.get_or_none(account=db_account, date=transaction.date,
+                                                         label=transaction.label, amount=transaction.amount)
                 if db_transaction is None:
-                    db_transaction = Transaction.create(account=db_account, date=transaction.date, label=transaction.label, amount=transaction.amount)
-
-
-
-
+                    db_transaction = Transaction.create(account=db_account, date=transaction.date,
+                                                        label=transaction.label, amount=transaction.amount, vu=False)
 
 
