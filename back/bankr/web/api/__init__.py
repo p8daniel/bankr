@@ -22,6 +22,7 @@ def before_request():
 def after_request(exception=None):
     db.close()
 
+
 api.add_resource(Accounts, '/accounts')
 api.add_resource(Transactions, '/transactions')
 api.add_resource(SyncWeboob, '/syncweboob')
