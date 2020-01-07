@@ -47,7 +47,6 @@ class CityPage(JsonPage):
             obj_name = Dict('localizedName')
 
             def obj_country(self):
-                # setattr(self.obj, 'country', Dict('country')(self)['id'].lower())
                 return Dict('country')(self)['id'].lower()
 
 
@@ -67,14 +66,11 @@ class WeatherPage(HTMLPage):
 
             month, day = (CleanText('/html/body/div/div[5]/div[1]/div[1]/div[3]/span'))(self).split(' ')
             the_date = datetime.datetime.now()
-            # print(datetime.datetime.strptime(month, '%b'))
             the_date = the_date.replace(day=int(day), month=int(datetime.datetime.strptime(month, '%B').month),
                                         hour=d.hour, minute=d.minute, second=0, microsecond=0)
 
             return the_date
-            # return datetime.datetime('')
 
-        # obj_id = Env('city_id')
 
         def obj_temp(self):
             temp = CleanDecimal('/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[1]/div[1]/div[1]/div/p[1]/text()')(
@@ -83,7 +79,7 @@ class WeatherPage(HTMLPage):
                 '/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[1]/div[1]/div[1]/div/p[1]/span/text()')(self)
             return Temperature(float(temp), unit)
 
-        # obj_text = Format('%s ', CleanText('/html/body/div/div[5]/div[1]/div/div[1]/a[1]/div/div[3]'))
+
 
         obj_text = Format('%s mbar - humidity %s%% - feels like %s°C',
                           CleanDecimal(
@@ -92,14 +88,9 @@ class WeatherPage(HTMLPage):
                               CleanText('/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[2]/div/div[1]/p[1]')),
                           CleanDecimal(
                               CleanText('/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[2]/div/div[1]/p[7]')),
-                          # CleanText('/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[2]/div/div[1]/p[1]'),
-                          # CleanText('/html/body/div/div[5]/div[1]/div[1]/div[1]/div/div[2]/div/div[1]/p[1]')
+
                           )
 
-        # def obj_temp(self):
-
-        #     temp = Dict('vt1observation/temperature')(self)
-        #     return Temperature(float(temp), 'C')
 
 
 class ForecastPage(HTMLPage):

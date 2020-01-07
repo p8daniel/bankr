@@ -5,4 +5,5 @@ from bankr.tasks.accounts import retrieve_accounts
 
 class SyncWeboob(Resource):
     def get(self):
-        retrieve_accounts()
+        retrieve_accounts().delay()
+        return {'msg': 'lauched!'}
